@@ -155,6 +155,12 @@
       object-fit: cover;
       border: 5px solid var(--primary-color);
       flex-shrink: 0;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .profile-img:hover {
+      transform: scale(1.05);
     }
 
     .about-text {
@@ -515,10 +521,10 @@
             competitions, and staying updated with the latest advancements in AI/ML technologies.
           </p>
         </div>
-        <!-- Placeholder for profile image -->
-        <div style="background-color: #dbeafe; width: 200px; height: 200px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 5px solid var(--primary-color);">
-          <i class="fas fa-user" style="font-size: 5rem; color: var(--primary-color);"></i>
-        </div>
+        <!-- Your Profile Image from GitHub -->
+        <img src="https://github.com/Parvaa10/ds-portfolio/raw/main/Imagegood.jpeg" 
+             alt="Parva Mehta - Data Science Professional" 
+             class="profile-img">
       </div>
     </section>
 
