@@ -2,54 +2,878 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Parva Mehta | Data Science Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    :root {
+      --primary-color: #2563eb;
+      --secondary-color: #1e40af;
+      --dark-color: #1e293b;
+      --light-color: #f8fafc;
+      --gray-color: #64748b;
+      --accent-color: #0ea5e9;
+      --success-color: #10b981;
+      --project-1: #3b82f6;
+      --project-2: #8b5cf6;
+      --project-3: #10b981;
+      --project-4: #f59e0b;
+      --project-5: #ef4444;
+    }
+
+    body {
+      background-color: #f1f5f9;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header & Hero Section */
+    header {
+      background: linear-gradient(135deg, var(--dark-color), var(--primary-color));
+      color: white;
+      padding: 80px 0;
+      text-align: center;
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+      margin-bottom: 60px;
+    }
+
+    .header-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 10px;
+      font-weight: 800;
+    }
+
+    .tagline {
+      font-size: 1.8rem;
+      color: #cbd5e1;
+      margin-bottom: 20px;
+      font-weight: 300;
+    }
+
+    .intro {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      color: #e2e8f0;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .btn {
+      padding: 12px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-block;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background-color: var(--accent-color);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+
+    .btn-outline:hover {
+      background-color: white;
+      color: var(--primary-color);
+      transform: translateY(-3px);
+    }
+
+    /* Sections */
+    section {
+      background-color: white;
+      border-radius: 10px;
+      padding: 40px;
+      margin-bottom: 40px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease;
+    }
+
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    h2 {
+      color: var(--primary-color);
+      font-size: 2.2rem;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 3px solid var(--accent-color);
+      display: inline-block;
+    }
+
+    /* About Section */
+    .about-content {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .profile-img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid var(--primary-color);
+      flex-shrink: 0;
+    }
+
+    .about-text {
+      flex: 1;
+    }
+
+    .about-text p {
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+    }
+
+    /* Skills Section */
+    .skills-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+      margin-top: 20px;
+    }
+
+    .skills-category {
+      background-color: #f8fafc;
+      padding: 25px;
+      border-radius: 8px;
+      border-left: 5px solid var(--primary-color);
+    }
+
+    .skills-category h3 {
+      color: var(--dark-color);
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 12px;
+    }
+
+    .skill-item {
+      background-color: white;
+      padding: 12px 15px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .skill-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      border-left: 3px solid var(--primary-color);
+    }
+
+    .skill-item i {
+      color: var(--primary-color);
+      font-size: 1rem;
+      width: 20px;
+    }
+
+    /* Projects Section */
+    .project-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 25px;
+      margin-bottom: 30px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background-color: var(--project-color);
+    }
+
+    .project-card:nth-child(1)::before {
+      background-color: var(--project-1);
+    }
+    .project-card:nth-child(2)::before {
+      background-color: var(--project-2);
+    }
+    .project-card:nth-child(3)::before {
+      background-color: var(--project-3);
+    }
+    .project-card:nth-child(4)::before {
+      background-color: var(--project-4);
+    }
+    .project-card:nth-child(5)::before {
+      background-color: var(--project-5);
+    }
+
+    .project-card:hover {
+      border-color: var(--accent-color);
+      box-shadow: 0 8px 15px rgba(37, 99, 235, 0.1);
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+
+    .project-card h3 {
+      color: var(--dark-color);
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+    }
+
+    .project-date {
+      background-color: #e0f2fe;
+      color: var(--primary-color);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .project-subtitle {
+      color: var(--gray-color);
+      font-style: italic;
+      margin-bottom: 15px;
+      font-size: 1rem;
+    }
+
+    .project-description {
+      margin-bottom: 20px;
+    }
+
+    .project-description ul {
+      margin-left: 20px;
+      margin-bottom: 15px;
+    }
+
+    .project-description li {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 15px 0;
+    }
+
+    .tag {
+      background-color: #e0f2fe;
+      color: var(--primary-color);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .project-links a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.3s;
+    }
+
+    .project-links a:hover {
+      color: var(--secondary-color);
+      text-decoration: underline;
+    }
+
+    /* Contact Section */
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      margin-top: 20px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 20px;
+      background-color: #f8fafc;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .contact-item:hover {
+      background-color: #e0f2fe;
+      transform: translateX(5px);
+    }
+
+    .contact-icon {
+      width: 50px;
+      height: 50px;
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .contact-text a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .contact-text a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--dark-color);
+      color: white;
+      text-align: center;
+      padding: 40px 0;
+      margin-top: 60px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    .copyright {
+      margin-top: 20px;
+      color: #cbd5e1;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      .tagline {
+        font-size: 1.4rem;
+      }
+      
+      .about-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .btn {
+        width: 100%;
+        max-width: 250px;
+        text-align: center;
+      }
+      
+      section {
+        padding: 25px;
+      }
+      
+      .project-header {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .skills-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    section {
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    /* Resume Section */
+    .resume-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(to right, #f0f9ff, #e0f2fe);
+      padding: 30px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .resume-text {
+      flex: 1;
+    }
+
+    .resume-btn {
+      margin-top: 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+  </style>
 </head>
 <body>
+  <!-- Header & Hero Section -->
+  <header>
+    <div class="container header-content">
+      <h1>Parva Mehta</h1>
+      <div class="tagline">Data Science & AI/ML Aspirant</div>
+      <p class="intro">
+        I am an aspiring Data Science professional with a strong foundation in Python,
+        data analysis, and machine learning concepts, focused on solving real-world problems.
+      </p>
+      <div class="cta-buttons">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#contact" class="btn btn-outline">Contact Me</a>
+      </div>
+    </div>
+  </header>
 
-  <h1>Parva Mehta</h1>
-  <p>Data Science & AI/ML Aspirant</p>
+  <div class="container">
+    <!-- About Section -->
+    <section id="about">
+      <h2>About Me</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p>
+            I am a passionate Data Science aspirant with a strong foundation in Python programming, 
+            statistical analysis, and machine learning algorithms. My goal is to leverage data-driven 
+            insights to solve complex real-world problems and contribute to innovative AI solutions.
+          </p>
+          <p>
+            I enjoy exploring datasets, building predictive models, and visualizing data to uncover 
+            meaningful patterns. Currently, I'm expanding my knowledge in deep learning and computer 
+            vision to tackle more advanced challenges in the field of artificial intelligence.
+          </p>
+          <p>
+            When I'm not coding, I enjoy reading research papers, participating in data science 
+            competitions, and staying updated with the latest advancements in AI/ML technologies.
+          </p>
+        </div>
+        <!-- Placeholder for profile image -->
+        <div style="background-color: #dbeafe; width: 200px; height: 200px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 5px solid var(--primary-color);">
+          <i class="fas fa-user" style="font-size: 5rem; color: var(--primary-color);"></i>
+        </div>
+      </div>
+    </section>
 
-  <section>
-    <h2>About Me</h2>
-    <p>
-      I am an aspiring Data Science professional with a strong foundation in Python,
-      data analysis, and machine learning concepts, focused on solving real-world problems.
-    </p>
-  </section>
+    <!-- Skills Section -->
+    <section id="skills">
+      <h2>Technical Skills</h2>
+      <div class="skills-container">
+        <div class="skills-category">
+          <h3><i class="fas fa-code"></i> Programming & Data Analysis</h3>
+          <div class="skills-grid">
+            <div class="skill-item">
+              <i class="fab fa-python"></i> Python
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-database"></i> SQL
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-file-excel"></i> Microsoft Excel
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-brain"></i> Machine Learning
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-robot"></i> Retrieval-Augmented Generation
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-ai"></i> Gen AI
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-chart-line"></i> Exploratory Data Analysis (EDA)
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-chart-bar"></i> Matplotlib, Seaborn
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-calculator"></i> NumPy
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-table"></i> Pandas
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-cogs"></i> Scikit-learn
+            </div>
+          </div>
+        </div>
+        
+        <div class="skills-category">
+          <h3><i class="fas fa-users"></i> Soft Skills</h3>
+          <div class="skills-grid">
+            <div class="skill-item">
+              <i class="fas fa-comments"></i> Communication
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-chalkboard-teacher"></i> Presentation
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-puzzle-piece"></i> Problem Solving
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-handshake"></i> Teamwork
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <section>
-    <h2>Skills</h2>
-    <ul>
-      <li>Python, SQL</li>
-      <li>Pandas, NumPy, Scikit-learn</li>
-      <li>EDA, Machine Learning, Computer Vision</li>
-      <li>Git, GitHub, Excel</li>
-    </ul>
-  </section>
+    <!-- Projects Section -->
+    <section id="projects">
+      <h2>Academic Projects</h2>
+      
+      <!-- Project 1 -->
+      <div class="project-card">
+        <div class="project-header">
+          <div>
+            <h3>Analyzing Daily Activity Patterns and Their Influence on Calorie Expenditure</h3>
+            <div class="project-subtitle">EDA and Machine Learning Study</div>
+          </div>
+          <div class="project-date">Dec 2025</div>
+        </div>
+        
+        <div class="project-description">
+          <ul>
+            <li>Processed and structured fitness tracker datasets by handling missing values, transforming variables, and creating relevant features for analysis.</li>
+            <li>Conducted exploratory data analysis to uncover trends and relationships between physical activity metrics and calorie consumption.</li>
+            <li>Developed and evaluated multiple machine learning algorithms to estimate total calories burned based on activity patterns.</li>
+            <li>Determined the most influential factors contributing to calorie expenditure through model insights and data interpretation.</li>
+          </ul>
+        </div>
+        
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Machine Learning</span>
+          <span class="tag">EDA</span>
+          <span class="tag">Data Processing</span>
+          <span class="tag">Feature Engineering</span>
+        </div>
+        
+        <div class="project-links">
+          <a href="https://github.com/Parvaa10/activity-calorie-analysis" target="_blank">
+            <i class="fab fa-github"></i> GitHub Repository
+          </a>
+        </div>
+      </div>
+      
+      <!-- Project 2 -->
+      <div class="project-card">
+        <div class="project-header">
+          <div>
+            <h3>Plant Leaf Disease Detection and Severity Analysis</h3>
+            <div class="project-subtitle">Image Processing Project</div>
+          </div>
+          <div class="project-date">Dec 2025</div>
+        </div>
+        
+        <div class="project-description">
+          <ul>
+            <li>Developed an image processing pipeline to automate plant disease detection, reducing dependency on manual visual inspection and subjectivity in diagnosis.</li>
+            <li>Performed diseased region segmentation on leaf images to accurately isolate infected areas from healthy portions.</li>
+            <li>Calculated disease severity by estimating the percentage of infected area relative to the total leaf area.</li>
+            <li>Utilized the Plant Village dataset and incorporated environmental parameters such as temperature and humidity to enrich analysis.</li>
+            <li>Focused on improving objective disease assessment and supporting precision agriculture decision making.</li>
+          </ul>
+        </div>
+        
+        <div class="project-tags">
+          <span class="tag">Computer Vision</span>
+          <span class="tag">Image Processing</span>
+          <span class="tag">Python</span>
+          <span class="tag">Segmentation</span>
+          <span class="tag">Data Analysis</span>
+        </div>
+        
+        <div class="project-links">
+          <a href="https://github.com/Parvaa10/plant-disease-detection" target="_blank">
+            <i class="fab fa-github"></i> GitHub Repository
+          </a>
+        </div>
+      </div>
+      
+      <!-- Project 3 -->
+      <div class="project-card">
+        <div class="project-header">
+          <div>
+            <h3>Samriddhi Digital Empowerment Platform for Self Help Groups (SHGs)</h3>
+            <div class="project-subtitle">Social Innovation and Digital Transformation Project with AI</div>
+          </div>
+          <div class="project-date">Dec 2025</div>
+        </div>
+        
+        <div class="project-description">
+          <ul>
+            <li>Designed a comprehensive digital ecosystem to improve financial transparency, record keeping, and market access for women led Self Help Groups.</li>
+            <li>Developed key modules including a voice enabled Smart Book ledger, AI chatbot assistant, SHG Health Score analytics engine, and a unified e-commerce marketplace.</li>
+            <li>Enabled data driven monitoring for CSR organizations through performance scoring and risk alerts to support better funding decisions.</li>
+            <li>Focused on solving literacy barriers, record opacity, and limited product visibility through voice technology, automation, and digital infrastructure.</li>
+            <li>Aimed at transforming SHGs into digitally empowered, credit ready enterprises while promoting financial inclusion and women entrepreneurship.</li>
+          </ul>
+        </div>
+        
+        <div class="project-tags">
+          <span class="tag">AI</span>
+          <span class="tag">Digital Transformation</span>
+          <span class="tag">Voice Technology</span>
+          <span class="tag">Analytics</span>
+          <span class="tag">Social Innovation</span>
+        </div>
+        
+        <div class="project-links">
+          <a href="https://github.com/Parvaa10/samriddhi-shg-platform" target="_blank">
+            <i class="fab fa-github"></i> GitHub Repository
+          </a>
+        </div>
+      </div>
+      
+      <!-- Project 4 -->
+      <div class="project-card">
+        <div class="project-header">
+          <div>
+            <h3>Airplanes Crash Trends and Operator Risk Analysis</h3>
+            <div class="project-subtitle">SQL Server and Data Analysis</div>
+          </div>
+          <div class="project-date">Sept 2025</div>
+        </div>
+        
+        <div class="project-description">
+          <ul>
+            <li>Prepared and refined aviation accident datasets by cleaning inconsistencies and organizing data for reliable analysis using Python.</li>
+            <li>Connected SQL Server with Python to retrieve, query, and verify structured data for analytical tasks.</li>
+            <li>Explored long term crash patterns, types of incidents, survival statistics, and operator related risk distributions through data analysis.</li>
+            <li>Generated meaningful insights on aviation safety progression, high risk operators, and key factors affecting accident impact and severity.</li>
+          </ul>
+        </div>
+        
+        <div class="project-tags">
+          <span class="tag">SQL</span>
+          <span class="tag">Python</span>
+          <span class="tag">Data Analysis</span>
+          <span class="tag">Data Cleaning</span>
+          <span class="tag">Trend Analysis</span>
+        </div>
+        
+        <div class="project-links">
+          <a href="https://github.com/Parvaa10/airplane-crash-analysis" target="_blank">
+            <i class="fab fa-github"></i> GitHub Repository
+          </a>
+        </div>
+      </div>
+      
+      <!-- Project 5 - CSR Report Analyzer -->
+      <div class="project-card">
+        <div class="project-header">
+          <div>
+            <h3>CSR Report Analyzer</h3>
+            <div class="project-subtitle">Interactive Dashboard and Analysis Tool</div>
+          </div>
+        </div>
+        
+        <div class="project-description">
+          <ul>
+            <li>Created an interactive dashboard to visualize and analyze CSR reports, improving trend identification and report interpretation.</li>
+            <li>Implemented data processing pipelines to extract key metrics from corporate social responsibility reports.</li>
+            <li>Developed visualization tools to compare CSR performance across companies and industries.</li>
+            <li>Enabled stakeholders to make data-driven decisions regarding corporate social responsibility initiatives.</li>
+          </ul>
+        </div>
+        
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Plotly</span>
+          <span class="tag">Dash</span>
+          <span class="tag">Data Visualization</span>
+          <span class="tag">EDA</span>
+        </div>
+        
+        <div class="project-links">
+          <a href="https://github.com/Parvaa10/Csr_Report_Analyzer" target="_blank">
+            <i class="fab fa-github"></i> GitHub Repository
+          </a>
+        </div>
+      </div>
+    </section>
 
-  <section>
-    <h2>Projects</h2>
-    <ul>
-      <li>
-        <strong>Project 1:</strong> Data Analysis on XYZ Dataset  
-        <br />
-        <a href="https://github.com/your-username/project-link">GitHub Repo</a>
-      </li>
-    </ul>
-  </section>
+    <!-- Resume Section -->
+    <section id="resume">
+      <h2>Resume</h2>
+      <div class="resume-container">
+        <div class="resume-text">
+          <p>Download my resume to learn more about my education, work experience, and detailed technical skills.</p>
+          <a href="resume.pdf" class="btn btn-primary resume-btn" download>
+            <i class="fas fa-download"></i> Download Resume (PDF)
+          </a>
+        </div>
+        <div class="resume-icon">
+          <i class="fas fa-file-pdf" style="font-size: 4rem; color: var(--primary-color);"></i>
+        </div>
+      </div>
+    </section>
 
-  <section>
-    <h2>Resume</h2>
-    <a href="resume.pdf">Download Resume</a>
-  </section>
+    <!-- Contact Section -->
+    <section id="contact">
+      <h2>Get In Touch</h2>
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div class="contact-text">
+            <h3>Email</h3>
+            <a href="mailto:parva100603@gmail.com">parva100603@gmail.com</a>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fab fa-github"></i>
+          </div>
+          <div class="contact-text">
+            <h3>GitHub</h3>
+            <a href="https://github.com/Parvaa10" target="_blank">github.com/Parvaa10</a>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fab fa-linkedin"></i>
+          </div>
+          <div class="contact-text">
+            <h3>LinkedIn</h3>
+            <a href="https://www.linkedin.com/in/parva-mehta-4a08a5271/" target="_blank">linkedin.com/in/parva-mehta-4a08a5271</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 
-  <section>
-    <h2>Contact</h2>
-    <p>Email: your-email@gmail.com</p>
-    <p>GitHub: https://github.com/your-username</p>
-    <p>LinkedIn: https://linkedin.com/in/your-profile</p>
-  </section>
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <h3 style="margin-bottom: 20px;">Parva Mehta | Data Science Portfolio</h3>
+      <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">
+        <a href="https://github.com/Parvaa10" target="_blank" style="color: white; font-size: 1.5rem;">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/parva-mehta-4a08a5271/" target="_blank" style="color: white; font-size: 1.5rem;">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="mailto:parva100603@gmail.com" style="color: white; font-size: 1.5rem;">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+      <div class="copyright">
+        &copy; 2023 Parva Mehta. All rights reserved.
+      </div>
+    </div>
+  </footer>
 
+  <script>
+    // Simple smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if(targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if(targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Add animation to project cards on scroll
+    const observerOptions = {
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = "1";
+          entry.target.style.transform = "translateY(0)";
+        }
+      });
+    }, observerOptions);
+
+    // Apply animation to project cards
+    document.querySelectorAll('.project-card').forEach(card => {
+      card.style.opacity = "0";
+      card.style.transform = "translateY(20px)";
+      card.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+      observer.observe(card);
+    });
+  </script>
 </body>
 </html>
